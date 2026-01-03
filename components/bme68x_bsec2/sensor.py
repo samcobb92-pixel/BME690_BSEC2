@@ -42,7 +42,7 @@ CONFIG_SCHEMA = cv.Schema({
         unit_of_measurement=UNIT_PARTS_PER_MILLION,
         accuracy_decimals=2,
     ),
-}).extend(i2c.i2c_device_schema(0x77))
+}).extend(i2c.i2c_device_schema(0x76))
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
@@ -62,4 +62,5 @@ async def to_code(config):
     ]:
         if key in config:
             sens = await sensor.new_sensor(config[key])
+
             cg.add(getattr(var, f"set_{key}_sensor")(sens))
